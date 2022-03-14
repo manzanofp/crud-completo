@@ -15,7 +15,7 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @GetMapping(value = "/listAllUser")
     public ResponseEntity<List<User>> listAllUser() {
         List<User> users = userRepository.findAll();
@@ -33,6 +33,13 @@ public class UserController {
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         User obj = userRepository.save(user);
         return new ResponseEntity<>(obj, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/deleteUser")
+    @ResponseBody
+    public ResponseEntity<String> deleteUser(@RequestParam Integer iduser){
+       userRepository.deleteById(iduser);
+       return  new ResponseEntity<String>("User successfully deleted",HttpStatus.OK);
     }
 
 
