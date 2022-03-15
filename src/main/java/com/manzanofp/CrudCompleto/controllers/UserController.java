@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
@@ -53,5 +54,10 @@ private UserRepository userRepository;
         return  new ResponseEntity<String>("User successfully deleted",HttpStatus.OK);
     }
 
-
+    @GetMapping(value = "/findByName")
+    @ResponseBody
+    public ResponseEntity<List<User>> findByName(@RequestParam(name = "name") String name) {
+        List<User> obj = userRepository.findByName(name.trim().toUpperCase());
+        return new  ResponseEntity<List<User>>(obj,HttpStatus.OK);
+    }
 }
