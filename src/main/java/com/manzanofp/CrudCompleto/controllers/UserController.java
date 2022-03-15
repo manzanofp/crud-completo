@@ -14,7 +14,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+private UserRepository userRepository;
 
     @GetMapping(value = "/listAllUser")
     public ResponseEntity<List<User>> listAllUser() {
@@ -22,24 +22,35 @@ public class UserController {
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/listUser/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Integer id) {
-        Optional<User> obj = userRepository.findById(id);
-        return  ResponseEntity.ok().body(obj);
+    @GetMapping(value = "/findUser")
+    public ResponseEntity<Optional<User>> findById(@RequestParam Integer iduser) {
+        Optional<User> user = userRepository.findById(iduser);
+        return  ResponseEntity.ok().body(user);
     }
 
     @PostMapping(value = "/saveUser")
     @ResponseBody
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         User obj = userRepository.save(user);
-        return new ResponseEntity<>(obj, HttpStatus.CREATED);
+        return new ResponseEntity<User>(obj, HttpStatus.CREATED);
     }
+
+    @PutMapping(value = "/updateUser")
+    @ResponseBody
+    public ResponseEntity<?> updateUser(@RequestBody User user){
+        if (user.getId() == null){
+            return new ResponseEntity<String>("Está faltando o atributo Id",HttpStatus.NOT_FOUND);
+        }
+        User obj = userRepository.saveAndFlush(user);
+        return  new ResponseEntity<User>(obj, HttpStatus.OK);
+    }
+
 
     @DeleteMapping(value = "/deleteUser")
     @ResponseBody
     public ResponseEntity<String> deleteUser(@RequestParam Integer iduser){
-       userRepository.deleteById(iduser);
-       return  new ResponseEntity<String>("User successfully deleted",HttpStatus.OK);
+        userRepository.deleteById(iduser);
+        return  new ResponseEntity<String>("User successfully deleted",HttpStatus.OK);
     }
 
 
