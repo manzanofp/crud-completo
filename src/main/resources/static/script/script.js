@@ -59,7 +59,7 @@ success: function (response){
 $('#tableResult > tbody > tr').remove();
 
 for (var i = 0; i < response.length; i++){
-$('#tableResult > tbody').append('<tr><td>'+response[i].id+'</td><td>'+response[i].name+'</td><td>'+response[i].age+'</td><td><button type="button" class="btn btn-outline-danger" onclick="edit('+response[i].id+')">Edit</button></td></tr>');
+$('#tableResult > tbody').append('<tr id="'+response[i].id+'"><td>'+response[i].id+'</td><td>'+response[i].name+'</td><td>'+response[i].age+'</td><td><button type="button" class="btn btn-primary" onclick="edit('+response[i].id+')">Edit</button></td><td><button type="button" class="btn btn-danger" onclick="deleteUser('+response[i].id+')">Delete</button></td></tr>');
 
 }
 
@@ -68,4 +68,34 @@ $('#tableResult > tbody').append('<tr><td>'+response[i].id+'</td><td>'+response[
 alert("error when searching: " + xhr.responseText);
 });
 }
+}
+
+function deleteUser(id){
+
+if(confirm('Really want to delete?')){
+
+$.ajax({
+method: "DELETE",
+url: "deleteUser",
+data: "iduser=" + id,
+
+success: function (response){
+
+$('#'+ id).remove();
+
+Alert(response);
+
+}
+}).fail(function (xhr, status, errorThrown) {
+alert("error deleting user by id " + xhr.responseText);
+});
+}
+}
+
+function userDelete(){
+
+var id = $('#id').val ();
+deleteUser(id);
+document.getElementById('formUser').reset();
+
 }

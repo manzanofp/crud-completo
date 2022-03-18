@@ -27,9 +27,10 @@
     </div>
 </form>
 
-<button type="button" class="btn btn-outline-danger" onclick="saveUser()">Save</button>
-<button type="button" class="btn btn-outline-danger" onclick="document.getElementById('formUser').reset();">New</button>
-<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal">Pesquisar</button>
+<button type="button" class="btn btn-success" onclick="saveUser();">Save</button>
+<button type="button" class="btn btn-info" onclick="document.getElementById('formUser').reset();">New</button>
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal">Search</button>
+<button type="button" class="btn btn-danger" onclick="userDelete();">Delete</button>
 
 <!-- Script JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -64,7 +65,8 @@
                         <th scope="col">ID</th>
                         <th scope="col">NAME</th>
                         <th scope="col">AGE</th>
-                        <th scope="col">EDITAR</th>
+                        <th scope="col">EDIT</th>
+                        <th scope="col">DELETE</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -76,8 +78,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" onclick="searchUser()">Search</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" onclick="searchUser();">Search</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
             </div>
         </div>
     </div>
