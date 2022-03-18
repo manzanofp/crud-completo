@@ -6,11 +6,14 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Crud Completo</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+
 </head>
 
 <body>
 
 <form action="" id="formUser">
+    <h3 id="title"> CRUD Operations -> (Create, Read, Update, Delete) </h3>
     <div class="mb-3">
         <label for="id" class="form-label">User Id</label>
         <input type="text" class="form-control" id="id" readonly="readonly">
@@ -25,12 +28,15 @@
         <label for="age" class="form-label">User Age</label>
         <input type="Number" class="form-control" id="age">
     </div>
+
+    <button type="button" class="btn btn-success" onclick="saveUser();">Save</button>
+    <button type="button" class="btn btn-info" onclick="document.getElementById('formUser').reset();">New</button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal">Search</button>
+    <button type="button" class="btn btn-danger" onclick="userDelete();">Delete</button>
+
 </form>
 
-<button type="button" class="btn btn-success" onclick="saveUser();">Save</button>
-<button type="button" class="btn btn-info" onclick="document.getElementById('formUser').reset();">New</button>
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal">Search</button>
-<button type="button" class="btn btn-danger" onclick="userDelete();">Delete</button>
+
 
 <!-- Script JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -59,6 +65,7 @@
 
                 </form>
 
+                <div id="table">
                 <table class="table" id="tableResult">
                     <thead>
                     <tr>
@@ -70,11 +77,9 @@
                     </tr>
                     </thead>
                     <tbody>
-
-
                     </tbody>
-
                 </table>
+                </div>
 
             </div>
             <div class="modal-footer">

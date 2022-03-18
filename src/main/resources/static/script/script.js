@@ -4,6 +4,18 @@ var id = $("#id").val();
 var name = $("#name").val();
 var age = $("#age").val();
 
+if(name == null || name != null && name.trim()== ' '){
+$("#name").focus();
+alert('Insert the name');
+return;
+}
+
+if(age == null || age != null && age.trim()== ' '){
+$("#age").focus();
+alert('Insert the age');
+return;
+}
+
 $.ajax({
 method: "POST",
 url: "saveUser",
@@ -93,9 +105,11 @@ alert("error deleting user by id " + xhr.responseText);
 }
 
 function userDelete(){
-
 var id = $('#id').val ();
+
+if(id != null && id.trim() != ' '){
 deleteUser(id);
 document.getElementById('formUser').reset();
+}
 
 }
